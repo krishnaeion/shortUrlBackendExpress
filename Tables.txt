@@ -2,16 +2,13 @@ CREATE TABLE IF NOT EXISTS public.short_url
 (
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
     original_url character varying(500) COLLATE pg_catalog."default",
-    short_url character varying(255) COLLATE pg_catalog."default",
+    short_url character varying(250) COLLATE pg_catalog."default",
     created_time timestamp(6) without time zone,
-    created_by character varying(255) COLLATE pg_catalog."default",
-    CONSTRAINT short_url_pkey PRIMARY KEY (id),
-    CONSTRAINT short_url_created_by_key UNIQUE (created_by)
+    CONSTRAINT short_url_pkey PRIMARY KEY (id)
 )
-
 CREATE TABLE IF NOT EXISTS public.users
 (
-    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    id integer NOT NULL DEFAULT nextval('users_id_seq'::regclass),
     user_name character varying(100) COLLATE pg_catalog."default",
     full_name character varying(100) COLLATE pg_catalog."default" NOT NULL,
     email_id character varying(255) COLLATE pg_catalog."default",
